@@ -1,5 +1,6 @@
 package com.ai.RiskNet.RT.web.env;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
@@ -23,7 +25,8 @@ public class Env
 {
 	static WebDriver driver = null;
 	static String browserName = null;
-	static String ChromeBrowser = null;
+	//static String ChromeBrowser = null;
+	static String IE = null;
 	static String cloudPlatformConfigFile = null;
 	static String currentPath = System.getProperty("user.dir");
 	static Properties prop = new Properties();
@@ -31,14 +34,14 @@ public class Env
 	public static String getBrowserName()
 	{
 		browserName = System.getProperty("browser");
-		ChromeBrowser = System.getProperty("cloud_config");
+		IE = System.getProperty("cloud_config");
 		
-		if(ChromeBrowser != null)
+		if(IE != null)
 		{
 			System.out.println("reading config file");
 			try {
-				browserName = ChromeBrowser.split("_")[0];
-				InputStream input = new FileInputStream(currentPath+"/src/main/java/BrowserConfig/"+ChromeBrowser+".properties");
+				browserName = IE.split("_")[0];
+				InputStream input = new FileInputStream(currentPath+"/src/main/java/BrowserConfig/"+IE+".properties");
 				input.close();
 				
 			}catch (Exception e) {
@@ -46,7 +49,7 @@ public class Env
 				System.exit(0);
 			}
 		}else if(browserName == null)
-			browserName = "ff";
+			browserName = "IE";
 		return browserName;
 	}
 	
@@ -77,7 +80,7 @@ public class Env
 	    	URL remoteDriverURL = new URL(url);
 	    	
 	    	DesiredCapabilities capability = new DesiredCapabilities();
-	    	input = new FileInputStream(currentPath+"/src/main/java/cloudBrowserConfigs/"+ChromeBrowser+".properties");
+	    	input = new FileInputStream(currentPath+"/src/main/java/cloudBrowserConfigs/"+IE+".properties");
 			prop.load(input);
 			enuKeys = prop.keys();
 			while (enuKeys.hasMoreElements()) {
@@ -110,14 +113,22 @@ public class Env
 				driver = new FirefoxDriver(profile);
 				driver = new FirefoxDriver();
 				break;
-
+//				System.setProperty("webdriver.gecko.driver", currentPath+"/BrowserConfig/BrowserDrivers/geckodriver.exe");
+//				driver = new FirefoxDriver();
+//				break;
+				
+				
 			case "ch":
 			case "chrome":
+				System.setProperty("webdriver.chrome.driver", currentPath+"/BrowserConfig/BrowserDrivers/chromedriver.exe");
+				//System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
 				driver = new ChromeDriver();
 				break;
 
 			case "ie" :
 			case "internetexplorer":
+				File file = new File(currentPath+"/BrowserConfig/BrowserDrivers/IEDriverServer.exe");
+				System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 				driver = new InternetExplorerDriver();
 				break;
 

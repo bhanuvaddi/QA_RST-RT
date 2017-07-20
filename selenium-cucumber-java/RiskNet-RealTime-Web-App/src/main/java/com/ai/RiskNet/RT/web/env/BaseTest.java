@@ -9,6 +9,7 @@ import com.ai.RiskNet.RT.web.utilities.MiscMethods;
 import com.ai.RiskNet.RT.web.utilities.NavigateMethods;
 import com.ai.RiskNet.RT.web.utilities.ProgressMethods;
 import com.ai.RiskNet.RT.web.utilities.ScreenShotMethods;
+import com.ai.RiskNet.RT.web.utilities.TestCaseFailed;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
