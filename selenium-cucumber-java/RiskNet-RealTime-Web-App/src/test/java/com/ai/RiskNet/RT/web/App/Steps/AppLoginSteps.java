@@ -33,42 +33,31 @@ public class AppLoginSteps implements BaseTest {
 
 	@When("^I enter valid email and passord$")
 	public void i_enter_valid_email_and_passord() throws Throwable {
-		
-		_bool = assertionObj.isElementDisplayed("xpath", "//*[@id='login-menu-options']");
-		if(_bool) {
-			String UserName = requtil.getEnvPropertyValue("AppLogin.properties", AppLoginUserName);
-			String Password = requtil.getEnvPropertyValue("AppLogin.properties", AppLoginPassword);
-			inputObj.enterText("id", UserName, "inputEmail3");
-			inputObj.enterText("id", Password, "inputPassword3");
-		}else {
-			Assert.fail("Login form not visiable.");
+		try {
+			_bool = assertionObj.isElementDisplayed("xpath", "//*[@id='view_container']");
+			if(_bool) {
+				String UserName = requtil.getEnvPropertyValue("AppLogin.properties", AppLoginUserName);
+				String Password = requtil.getEnvPropertyValue("AppLogin.properties", AppLoginPassword);
+				inputObj.enterText("id", UserName, "identifierId");
+				clickObj.click("xpath", "//*[(@id='identifierNext') or (@id='passwordNext')]");
+				inputObj.enterText("name", Password, "password");
+				clickObj.click("xpath", "//*[(@id='passwordNext')]");
+			}else {
+				Assert.fail("Login form not visiable.");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	@Then("^I am logged in$")
 	public void i_am_logged_in() throws Throwable {
 		try {
-			assertionObj.checkElementPresence("xpath", "//*[(@id='sign-out')]", true);
+			//clickObj.click("xpath", "//*[contains(@href,'SignOutOptions')]");
+			assertionObj.checkElementPresence("xpath", "//*[contains(@href,'SignOutOptions')]", true);
 		} catch (TestCaseFailed e) {
 			e.printStackTrace();
 		}
+		navigationObj.closeDriver();
 	}
-	
-//	@Given("^I navigate to to RiskNet RealTime web application$")
-//	public void i_navigate_to_to_RiskNet_RealTime_web_application() throws Throwable {
-//	    System.out.println("@GIVEN");
-//	    System.out.println(System.getProperty("user.dir")); 
-//	    System.out.println(System.getProperty("user.dir")+"/BrowserConfig/BrowserDrivers/");
-//	}
-//
-//	@When("^I enter valid email and passord$")
-//	public void i_enter_valid_email_and_passord() throws Throwable {
-//		System.out.println("@WHEN");
-//	}
-//
-//	@Then("^I am logged in$")
-//	public void i_am_logged_in() throws Throwable {
-//		System.out.println("@THEN");
-//	}
-//	
 }
