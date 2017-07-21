@@ -34,6 +34,7 @@ public class AppLoginSteps implements BaseTest {
 	@When("^I enter valid email and passord$")
 	public void i_enter_valid_email_and_passord() throws Throwable {
 		try {
+			//clickObj.clickForcefully("xpath", "//a[contains(@href,'https://mail.google.com/mail/') ] ");
 			_bool = assertionObj.isElementDisplayed("xpath", "//*[@id='view_container']");
 			if(_bool) {
 				String UserName = requtil.getEnvPropertyValue("AppLogin.properties", AppLoginUserName);
