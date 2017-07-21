@@ -12,9 +12,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -49,7 +51,7 @@ public class Env
 				System.exit(0);
 			}
 		}else if(browserName == null)
-			browserName = "IE";
+			browserName = "ff";
 		return browserName;
 	}
 	
@@ -108,28 +110,29 @@ public class Env
 			switch (browser.toLowerCase()) {
 			case "ff":
 			case "firefox":
-				ProfilesIni allProfiles = new ProfilesIni();
-				FirefoxProfile profile = allProfiles.getProfile("selenium");
-				driver = new FirefoxDriver(profile);
-				driver = new FirefoxDriver();
-				break;
-//				System.setProperty("webdriver.gecko.driver", currentPath+"/BrowserConfig/BrowserDrivers/geckodriver.exe");
+//				ProfilesIni allProfiles = new ProfilesIni();
+//				FirefoxProfile profile = allProfiles.getProfile("default");
+//				driver = new FirefoxDriver(profile);
 //				driver = new FirefoxDriver();
 //				break;
 				
-				
+				System.setProperty("webdriver.gecko.driver", currentPath+"\\BrowserConfig\\BrowserDrivers\\wires.exe");
+				driver = new MarionetteDriver();
+				break;
+			
 			case "ch":
 			case "chrome":
-				System.setProperty("webdriver.chrome.driver", currentPath+"/BrowserConfig/BrowserDrivers/chromedriver.exe");
-				//System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
+				System.setProperty("webdriver.chrome.driver", currentPath+"\\BrowserConfig\\BrowserDrivers\\chromedriver.exe");
 				driver = new ChromeDriver();
 				break;
 
 			case "ie" :
 			case "internetexplorer":
-				File file = new File(currentPath+"/BrowserConfig/BrowserDrivers/IEDriverServer.exe");
-				System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-				driver = new InternetExplorerDriver();
+			case "edge":
+				System.out.println("IE doesn't support for this application. We are using Edge Browser instead.");
+				System.setProperty("webdriver.edge.driver", currentPath+"\\BrowserConfig\\BrowserDrivers\\MicrosoftWebDriver.exe");
+				//driver = new InternetExplorerDriver();
+				driver = new EdgeDriver();
 				break;
 
 			case "safari":
