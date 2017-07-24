@@ -10,8 +10,11 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -20,6 +23,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
 
 public class Env 
 {
@@ -49,7 +53,7 @@ public class Env
 				System.exit(0);
 			}
 		}else if(browserName == null)
-			browserName = "IE";
+			browserName = "ff";
 		return browserName;
 	}
 	
@@ -108,28 +112,33 @@ public class Env
 			switch (browser.toLowerCase()) {
 			case "ff":
 			case "firefox":
-				ProfilesIni allProfiles = new ProfilesIni();
-				FirefoxProfile profile = allProfiles.getProfile("selenium");
-				driver = new FirefoxDriver(profile);
-				driver = new FirefoxDriver();
-				break;
-//				System.setProperty("webdriver.gecko.driver", currentPath+"/BrowserConfig/BrowserDrivers/geckodriver.exe");
+//				ProfilesIni allProfiles = new ProfilesIni();
+//				FirefoxProfile profile = allProfiles.getProfile("selenium");
+//				driver = new FirefoxDriver(profile);
 //				driver = new FirefoxDriver();
 //				break;
-				
+				System.setProperty("webdriver.gecko.driver", currentPath+"/BrowserConfig/BrowserDrivers/wires.exe");
+				driver = new FirefoxDriver();
+				break;
 				
 			case "ch":
 			case "chrome":
 				System.setProperty("webdriver.chrome.driver", currentPath+"/BrowserConfig/BrowserDrivers/chromedriver.exe");
-				//System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
+//				ChromeOptions options = new ChromeOptions();
+//			    options.setExperimentalOption("useAutomationExtension", true);
+//			    driver = new ChromeDriver(options);
 				driver = new ChromeDriver();
 				break;
 
 			case "ie" :
 			case "internetexplorer":
-				File file = new File(currentPath+"/BrowserConfig/BrowserDrivers/IEDriverServer.exe");
-				System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+				System.setProperty("webdriver.ie.driver", currentPath+"/BrowserConfig/BrowserDrivers/IEDriverServer.exe");
 				driver = new InternetExplorerDriver();
+				break;
+			
+			case "edge":
+				System.setProperty("webdriver.edge.driver", currentPath+"/BrowserConfig/BrowserDrivers/MicrosoftWebDriver.exe");
+				driver = new EdgeDriver();
 				break;
 
 			case "safari":
@@ -146,7 +155,8 @@ public class Env
 			}//switch
 				
 			driver.manage().deleteAllCookies();
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
+			driver.manage().window().setSize(new Dimension(1920, 1075));
 			driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
