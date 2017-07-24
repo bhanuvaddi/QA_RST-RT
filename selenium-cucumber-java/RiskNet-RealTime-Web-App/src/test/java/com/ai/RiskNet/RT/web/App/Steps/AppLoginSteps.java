@@ -42,19 +42,8 @@ public class AppLoginSteps implements BaseTest {
 		}
 	}
 	
-//	@Then("^I am able to signin$")
-//	public void i_am_able_to_signin() throws Throwable {
-//		assertionObj.checkElementPresence("xpath", "//button[(@id='signInButton')]", true);
-//	}
-//	
-//	@Given("^I navigate to to RiskNet RealTime web application$")
-//	public void i_navigate_to_to_RiskNet_RealTime_web_application() throws Throwable {
-//	    String RST_URL = requtil.getEnvPropertyValue("AppLogin.properties", RiskNetRT_URL);
-//	    navigationObj.navigateTo(RST_URL);
-//	}
-
-	@When("^I enter invalid email and passord$")
-	public void i_enter_invalid_email_and_passord() throws Throwable {
+	@When("^I enter invalid email and password$")
+	public void i_enter_invalid_email_and_password() throws Throwable {
 		try {
 			_bool = assertionObj.isElementDisplayed("id", "login-menu-options");
 			if(_bool) {
@@ -80,8 +69,8 @@ public class AppLoginSteps implements BaseTest {
 		}
 	}
 
-	@When("^I enter valid email and passord$")
-	public void i_enter_valid_email_and_passord() throws Throwable {
+	@When("^I enter valid email and password$")
+	public void i_enter_valid_email_and_password() throws Throwable {
 		try {
 			_bool = assertionObj.isElementDisplayed("id", "login-menu-options");
 			if(_bool) {
@@ -99,7 +88,7 @@ public class AppLoginSteps implements BaseTest {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Then("^I am logged in$")
 	public void i_am_logged_in() throws Throwable {
 		try {
@@ -108,6 +97,12 @@ public class AppLoginSteps implements BaseTest {
 		} catch (TestCaseFailed e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Then("^I am on the risknet realtime home page$")
+	public void i_am_on_the_risknet_realtime_home_page() throws Throwable {
+		assertionObj.isElementDisplayed("xpath", "//ul[(@class='homescreen-app-buttons')]");
+		navigationObj.closeDriver();	
 	}
 	
 	@When("^I login with valid credentials$")
@@ -133,21 +128,48 @@ public class AppLoginSteps implements BaseTest {
 		}
 	}
 	
-	@Then("^I am on the risknet reltime home page$")
-	public void i_am_on_the_risknet_reltime_home_page() throws Throwable {
-		assertionObj.isElementDisplayed("xpath", "//ul[(@class='homescreen-app-buttons')]");
-		navigationObj.closeDriver();		
-	}
-	
-	@When("^I select \"([^\"]*)\"$")
+	@When("^I select (.*)$")
 	public void i_select(String Feature) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    
+		switch(Feature) {
+		case "alerts":
+			clickObj.click("xpath", "//ul[(@class='homescreen-app-buttons')]//a[contains(@href,'alerts')]");
+			Thread.sleep(1500);
+			break;
+		case "rules":
+			clickObj.click("xpath", "//ul[(@class='homescreen-app-buttons')]//a[contains(@href,'rules')]");
+			Thread.sleep(1500);
+			break;
+		case "statistics":
+			clickObj.click("xpath", "//ul[(@class='homescreen-app-buttons')]//a[contains(@href,'statistics')]");
+			Thread.sleep(1500);
+			break;
+		default:
+			Assert.fail(Feature+" not yet implemented, failed @When I select "+Feature);
+			break;
+		}
 	}
 
-	@Then("^I am able to access \"([^\"]*)\"$")
+	@Then("^I am able to access (.*)$")
 	public void i_am_able_to_access(String Feature) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		switch(Feature) {
+		case "alerts":
+			assertionObj.checkElementPresence("id", "alert-menu", true);
+			Thread.sleep(500);
+			clickObj.click("xpath", "//li[@id='options']");
+			clickObj.click("xpath", "//li[@id='options']//li[@id='sign-out']");
+		case "rules":
+			assertionObj.checkElementPresence("id", "rule-new", true);
+			Thread.sleep(500);
+			clickObj.click("xpath", "//li[@id='options']");
+			clickObj.click("xpath", "//li[@id='options']//li[@id='sign-out']");
+		case "statistics":
+			assertionObj.checkElementPresence("id", "stat-new", true);
+			Thread.sleep(500);
+			clickObj.click("xpath", "//li[@id='options']");
+			clickObj.click("xpath", "//li[@id='options']//li[@id='sign-out']");
+			break;
+		}
+		navigationObj.closeDriver();
 	}
 }
