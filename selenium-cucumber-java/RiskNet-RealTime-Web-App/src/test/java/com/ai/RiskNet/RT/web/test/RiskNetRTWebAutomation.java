@@ -7,9 +7,9 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		//plugin = {"html:target/cucumberHtmlReport"},
+		plugin = {"html:target/cucumberHtmlReport"}, strict = false, dryRun = false,
 		//pretty:target/cucumber-json-report.json
-		plugin		= {"pretty"}, strict = false, dryRun = false,
+		//plugin		= {"pretty"}, strict = false, dryRun = false,
 		features	= {"src/test/resources/features"},
 		glue		= {"com.ai.RiskNet.RT.web.App.Steps"} 		
 )

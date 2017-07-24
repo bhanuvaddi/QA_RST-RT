@@ -53,7 +53,7 @@ public class Env
 				System.exit(0);
 			}
 		}else if(browserName == null)
-			browserName = "chrome";
+			browserName = "ff";
 		return browserName;
 	}
 	

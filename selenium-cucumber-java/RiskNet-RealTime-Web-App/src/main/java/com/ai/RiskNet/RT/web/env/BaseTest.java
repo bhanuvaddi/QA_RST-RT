@@ -1,5 +1,9 @@
 package com.ai.RiskNet.RT.web.env;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.ai.RiskNet.RT.web.apputilities.AppliactionActions;
 import com.ai.RiskNet.RT.web.utilities.AssertionMethods;
 import com.ai.RiskNet.RT.web.utilities.ClickElementsMethods;
 import com.ai.RiskNet.RT.web.utilities.ConfigurationMethods;
@@ -9,10 +13,6 @@ import com.ai.RiskNet.RT.web.utilities.MiscMethods;
 import com.ai.RiskNet.RT.web.utilities.NavigateMethods;
 import com.ai.RiskNet.RT.web.utilities.ProgressMethods;
 import com.ai.RiskNet.RT.web.utilities.ScreenShotMethods;
-import com.ai.RiskNet.RT.web.utilities.TestCaseFailed;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public interface BaseTest 
 {
@@ -29,4 +29,5 @@ public interface BaseTest
 	ProgressMethods progressObj = new ProgressMethods();
 	JavascriptHandlingMethods javascriptObj = new JavascriptHandlingMethods();
 	ScreenShotMethods screenshotObj = new ScreenShotMethods();
+	AppliactionActions appactionsObj = new AppliactionActions();
 }
