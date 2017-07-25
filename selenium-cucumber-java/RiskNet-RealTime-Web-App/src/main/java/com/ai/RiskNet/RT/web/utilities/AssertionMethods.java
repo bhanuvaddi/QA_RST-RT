@@ -193,7 +193,7 @@ public class AssertionMethods extends SelectElementByType implements BaseTest
 		element = wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
 		return element.isDisplayed();
 	}
-	
+		
 	/** method to check element presence
 	@param accessType : String : Locator type (id, name, class, xpath, css)
 	@param accessName : String : Locator value

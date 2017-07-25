@@ -14,15 +14,15 @@ Scenario: Open the risknet realtime
 		 Then I am logged in   
 		  And I am on the risknet realtime home page
 
-@Regression
-Scenario Outline: Risknet realtime features
-		Given I navigate to the risknet realtime
-		 When I login with valid credentials
-		  And I select <feature>
-		 Then I am able to access <feature>
-Examples:
-|	feature			|
-|	alerts			|
-|	rules				|
-|	statistics	|	  
+#@Regression
+#Scenario: Risknet realtime features
+#		Given I navigate to the risknet realtime
+#		 When I login with valid credentials
+#		  And I select alerts
+#		 Then I am able to access alerts
+#Examples:
+#|	feature			|
+#|	alerts			|
+#|	rules				|
+#|	statistics	|	  
 

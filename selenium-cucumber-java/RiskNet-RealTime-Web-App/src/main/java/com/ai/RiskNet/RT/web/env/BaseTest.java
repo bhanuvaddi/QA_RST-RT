@@ -3,7 +3,7 @@ package com.ai.RiskNet.RT.web.env;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.ai.RiskNet.RT.web.apputilities.AppliactionActions;
+import com.ai.RiskNet.RT.web.app.utilities.AppliactionActions;
 import com.ai.RiskNet.RT.web.utilities.AssertionMethods;
 import com.ai.RiskNet.RT.web.utilities.ClickElementsMethods;
 import com.ai.RiskNet.RT.web.utilities.ConfigurationMethods;
@@ -30,4 +30,5 @@ public interface BaseTest
 	JavascriptHandlingMethods javascriptObj = new JavascriptHandlingMethods();
 	ScreenShotMethods screenshotObj = new ScreenShotMethods();
 	AppliactionActions appactionsObj = new AppliactionActions();
+	
 }
