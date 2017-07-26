@@ -36,4 +36,13 @@ public class RequirmentUtils {
 		}
 		return properties.getProperty(propertyName);
 	}
+	
+	/** Method to find the Locator type
+	@param locatorTypeString : String : Locator type (id, name, class, xpath, css) using
+	@return String : Locator type (id, name, class, xpath, css)
+	*/
+	public String objectLocator(String locatorTypeString) {
+		int indexof_ = locatorTypeString.indexOf("_");
+		return locatorTypeString.substring(0, indexof_);
+	}
 }
