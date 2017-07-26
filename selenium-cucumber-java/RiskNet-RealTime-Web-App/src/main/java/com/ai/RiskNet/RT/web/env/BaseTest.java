@@ -17,9 +17,8 @@ import com.ai.RiskNet.RT.web.utilities.ScreenShotMethods;
 public interface BaseTest 
 {
 	public static WebDriver driver = Env.CreateWebDriver(Env.getBrowserName());
-	public static WebDriverWait wait = new WebDriverWait(driver, 30);
-	
-	
+	public static WebDriverWait wait = new WebDriverWait(driver, 5);
+		
 	MiscMethods miscmethodObj = new MiscMethods();
 	NavigateMethods navigationObj = new NavigateMethods();
 	AssertionMethods assertionObj = new AssertionMethods();
