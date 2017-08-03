@@ -67,7 +67,7 @@ public class AppliactionActions extends RequirmentUtils implements BaseTest{
 		clickObj.click(objectLocator("xpath_Header_Options"), xpath_Header_Options);
 		Thread.sleep(500);
 		clickObj.clickForcefully(objectLocator("xpath_SignOutButton" ), xpath_SignOutButton);
-		Thread.sleep(6000);
+		Thread.sleep(2000);
 	}
 
 }
